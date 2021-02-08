@@ -9,7 +9,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat
+    testthat,
+    covr
 LinkingTo: 
     Rcpp
 Imports: 
