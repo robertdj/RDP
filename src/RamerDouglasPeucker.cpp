@@ -7,7 +7,7 @@ using namespace std;
 
 typedef std::pair<double, double> Point;
 
-double PerpendicularDistance(const Point &pt, const Point &lineStart, const Point &lineEnd)
+double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, const Point &lineEnd)
 {
     double dx = lineEnd.first - lineStart.first;
     double dy = lineEnd.second - lineStart.second;
@@ -34,11 +34,11 @@ double PerpendicularDistance(const Point &pt, const Point &lineStart, const Poin
     double ax = pvx - dsx;
     double ay = pvy - dsy;
 
-    return pow(ax*ax + ay*ay, 0.5);
+    return ax*ax + ay*ay;
 }
 
 
-void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<Point> &out)
+void RamerDouglasPeucker(const vector<Point> &pointList, double epsilonSquared, vector<Point> &out)
 {
     if (pointList.size() < 2)
         throw invalid_argument("Not enough points to simplify");
@@ -46,10 +46,11 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<
     // Find the point with the maximum distance from line between start and end
     double dmax = 0.0;
     size_t index = 0;
+
     size_t end = pointList.size() - 1;
     for (auto i = 1; i < end; i++)
     {
-        double d = PerpendicularDistance(pointList[i], pointList[0], pointList[end]);
+        double d = PerpendicularDistanceSquared(pointList[i], pointList[0], pointList[end]);
         if (d > dmax)
         {
             index = i;
@@ -58,15 +59,15 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<
     }
 
     // If max distance is greater than epsilon, recursively simplify
-    if (dmax > epsilon)
+    if (dmax > epsilonSquared)
     {
         // Recursive call
         vector<Point> recResults1;
         vector<Point> recResults2;
         vector<Point> firstLine(pointList.begin(), pointList.begin() + index + 1);
         vector<Point> lastLine(pointList.begin() + index, pointList.end());
-        RamerDouglasPeucker(firstLine, epsilon, recResults1);
-        RamerDouglasPeucker(lastLine, epsilon, recResults2);
+        RamerDouglasPeucker(firstLine, epsilonSquared, recResults1);
+        RamerDouglasPeucker(lastLine, epsilonSquared, recResults2);
 
         // Build the result list
         out.assign(recResults1.begin(), recResults1.end() - 1);
@@ -112,8 +113,9 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
         points[i] = Point(x[i], y[i]);
     }
 
+    double epsilonSquared = epsilon * epsilon;
     vector<Point> pointsOut;
-    RamerDouglasPeucker(points, epsilon, pointsOut);
+    RamerDouglasPeucker(points, epsilonSquared, pointsOut);
 
     auto nOut = pointsOut.size();
     vector<double> xOut(nOut);
