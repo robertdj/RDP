@@ -40,14 +40,14 @@ double PerpendicularDistance(const Point &pt, const Point &lineStart, const Poin
 
 void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<Point> &out)
 {
-    if(pointList.size()<2)
+    if (pointList.size() < 2)
         throw invalid_argument("Not enough points to simplify");
 
     // Find the point with the maximum distance from line between start and end
     double dmax = 0.0;
     size_t index = 0;
     size_t end = pointList.size() - 1;
-    for (std::size_t i = 1; i < end; i++)
+    for (auto i = 1; i < end; i++)
     {
         double d = PerpendicularDistance(pointList[i], pointList[0], pointList[end]);
         if (d > dmax)
@@ -115,14 +115,14 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
     vector<Point> pointsOut;
     RamerDouglasPeucker(points, epsilon, pointsOut);
 
-    auto n_out = pointsOut.size();
-    vector<double> x_out(n_out);
-    vector<double> y_out(n_out);
+    auto nOut = pointsOut.size();
+    vector<double> xOut(nOut);
+    vector<double> yOut(nOut);
 
-    for (auto i = 0; i < n_out; i++) {
-        x_out[i] = pointsOut[i].first;
-        y_out[i] = pointsOut[i].second;
+    for (auto i = 0; i < nOut; i++) {
+        xOut[i] = pointsOut[i].first;
+        yOut[i] = pointsOut[i].second;
     }
 
-    return Rcpp::DataFrame::create(Rcpp::Named("x") = x_out, Rcpp::Named("y") = y_out);
+    return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut);
 }
