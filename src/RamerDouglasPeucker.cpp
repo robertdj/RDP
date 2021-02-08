@@ -85,11 +85,11 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<
 //'
 //' The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
 //'
-//' @param x The `x` values
-//' @param y The `y` values
-//' @param epsilon The
+//' @param x The `x` values of the curve.
+//' @param y The `y` values of the curve.
+//' @param epsilon The threshold for filtering outliers from the simplified curve.
 //'
-//' @return The `x` and `y` values.
+//' @return The `x` and `y` values of the simplified curve.
 //'
 //' @export
 //'
