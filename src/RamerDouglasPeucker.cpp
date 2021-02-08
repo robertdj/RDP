@@ -13,7 +13,7 @@ double PerpendicularDistance(const Point &pt, const Point &lineStart, const Poin
 	double dy = lineEnd.second - lineStart.second;
 
 	// Normalise
-	double mag = pow(pow(dx,2.0) + pow(dy,2.0), 0.5);
+	double mag = pow(dx*dx + dy*dy, 0.5);
 	if (mag > 0.0)
 	{
 		dx /= mag;
@@ -34,8 +34,9 @@ double PerpendicularDistance(const Point &pt, const Point &lineStart, const Poin
 	double ax = pvx - dsx;
 	double ay = pvy - dsy;
 
-	return pow(pow(ax,2.0) + pow(ay,2.0), 0.5);
+	return pow(ax*ax + ay*ay, 0.5);
 }
+
 
 void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<Point> &out)
 {
@@ -81,6 +82,7 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<
 		out.push_back(pointList[end]);
 	}
 }
+
 
 //' Ramer-Douglas-Peucker
 //'
