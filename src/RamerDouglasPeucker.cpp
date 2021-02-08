@@ -2,7 +2,6 @@
 using namespace Rcpp;
 
 #include <cmath>
-#include <vector>
 
 typedef std::pair<double, double> Point;
 
