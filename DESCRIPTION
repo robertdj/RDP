@@ -3,7 +3,7 @@ Title: Implementation of the Ramer-Douglas-Peucker algorithm
 Version: 0.0.1
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
 Description: Implementation of the Ramer-Douglas-Peucker algorithm.
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
