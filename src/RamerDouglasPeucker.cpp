@@ -3,7 +3,6 @@ using namespace Rcpp;
 
 #include <cmath>
 #include <vector>
-using namespace std;
 
 typedef std::pair<double, double> Point;
 
@@ -38,10 +37,10 @@ double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, con
 }
 
 
-void RamerDouglasPeucker(const vector<Point> &pointList, double epsilonSquared, vector<Point> &out)
+void RamerDouglasPeucker(const std::vector<Point> &pointList, double epsilonSquared, std::vector<Point> &out)
 {
     if (pointList.size() < 2)
-        throw invalid_argument("Not enough points to simplify");
+        throw std::invalid_argument("Not enough points to simplify");
 
     // Find the point with the maximum distance from line between start and end
     double dmax = 0.0;
@@ -62,10 +61,10 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilonSquared, 
     if (dmax > epsilonSquared)
     {
         // Recursive call
-        vector<Point> recResults1;
-        vector<Point> recResults2;
-        vector<Point> firstLine(pointList.begin(), pointList.begin() + index + 1);
-        vector<Point> lastLine(pointList.begin() + index, pointList.end());
+        std::vector<Point> recResults1;
+        std::vector<Point> recResults2;
+        std::vector<Point> firstLine(pointList.begin(), pointList.begin() + index + 1);
+        std::vector<Point> lastLine(pointList.begin() + index, pointList.end());
         RamerDouglasPeucker(firstLine, epsilonSquared, recResults1);
         RamerDouglasPeucker(lastLine, epsilonSquared, recResults2);
 
@@ -73,7 +72,7 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilonSquared, 
         out.assign(recResults1.begin(), recResults1.end() - 1);
         out.insert(out.end(), recResults2.begin(), recResults2.end());
         if (out.size() < 2)
-            throw runtime_error("Problem assembling output");
+            throw std::runtime_error("Problem assembling output");
     }
     else
     {
@@ -102,24 +101,24 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
     auto nx = x.length();
 
     if (nx != y.length())
-        throw invalid_argument("x and y vectors must be of equal length");
+        throw std::invalid_argument("x and y vectors must be of equal length");
 
     if (epsilon <= 0)
-        throw invalid_argument("epsilon must be positive");
+        throw std::invalid_argument("epsilon must be positive");
 
-    vector<Point> points(nx);
+    std::vector<Point> points(nx);
 
     for (auto i = 0; i < nx; i++) {
         points[i] = Point(x[i], y[i]);
     }
 
     double epsilonSquared = epsilon * epsilon;
-    vector<Point> pointsOut;
+    std::vector<Point> pointsOut;
     RamerDouglasPeucker(points, epsilonSquared, pointsOut);
 
     auto nOut = pointsOut.size();
-    vector<double> xOut(nOut);
-    vector<double> yOut(nOut);
+    std::vector<double> xOut(nOut);
+    std::vector<double> yOut(nOut);
 
     for (auto i = 0; i < nOut; i++) {
         xOut[i] = pointsOut[i].first;
