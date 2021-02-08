@@ -36,7 +36,7 @@ double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, con
 }
 
 
-void RamerDouglasPeucker(const std::vector<Point> &pointList, double epsilonSquared, std::vector<Point> &out)
+void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonSquared, std::vector<Point> &out)
 {
     if (pointList.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
@@ -64,8 +64,8 @@ void RamerDouglasPeucker(const std::vector<Point> &pointList, double epsilonSqua
         std::vector<Point> recResults2;
         std::vector<Point> firstLine(pointList.begin(), pointList.begin() + index + 1);
         std::vector<Point> lastLine(pointList.begin() + index, pointList.end());
-        RamerDouglasPeucker(firstLine, epsilonSquared, recResults1);
-        RamerDouglasPeucker(lastLine, epsilonSquared, recResults2);
+        RamerDouglasPeuckerCpp(firstLine, epsilonSquared, recResults1);
+        RamerDouglasPeuckerCpp(lastLine, epsilonSquared, recResults2);
 
         // Build the result list
         out.assign(recResults1.begin(), recResults1.end() - 1);
@@ -96,7 +96,7 @@ void RamerDouglasPeucker(const std::vector<Point> &pointList, double epsilonSqua
 //' @export
 //'
 // [[Rcpp::export]]
-Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon) {
+Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon) {
     auto nx = x.length();
 
     if (nx != y.length())
@@ -113,7 +113,7 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
 
     double epsilonSquared = epsilon * epsilon;
     std::vector<Point> pointsOut;
-    RamerDouglasPeucker(points, epsilonSquared, pointsOut);
+    RamerDouglasPeuckerCpp(points, epsilonSquared, pointsOut);
 
     auto nOut = pointsOut.size();
     std::vector<double> xOut(nOut);
