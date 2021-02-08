@@ -95,7 +95,7 @@ void RamerDouglasPeucker(const vector<Point> &pointList, double epsilon, vector<
 //'
 // [[Rcpp::export]]
 Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon) {
-    size_t nx = x.length();
+    auto nx = x.length();
 
     if (nx != y.length())
         throw invalid_argument("x and y vectors must be of equal length");
@@ -105,18 +105,18 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
 
     vector<Point> points(nx);
 
-    for (size_t i = 0; i < nx; i++) {
+    for (auto i = 0; i < nx; i++) {
         points[i] = Point(x[i], y[i]);
     }
 
     vector<Point> pointsOut;
     RamerDouglasPeucker(points, epsilon, pointsOut);
 
-    size_t n_out = pointsOut.size();
+    auto n_out = pointsOut.size();
     vector<double> x_out(n_out);
     vector<double> y_out(n_out);
 
-    for (size_t i = 0; i < n_out; i++) {
+    for (auto i = 0; i < n_out; i++) {
         x_out[i] = pointsOut[i].first;
         y_out[i] = pointsOut[i].second;
     }
