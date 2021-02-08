@@ -103,6 +103,9 @@ Rcpp::DataFrame RDP(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon
     if (nx != y.length())
         throw invalid_argument("x and y vectors must be of equal length");
 
+    if (epsilon <= 0)
+        throw invalid_argument("epsilon must be positive");
+
     vector<Point> points(nx);
 
     for (size_t i = 0; i < nx; i++) {

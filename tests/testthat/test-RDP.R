@@ -53,3 +53,20 @@ test_that("Bigger example", {
         data.frame(x = c(3.5, 23.2, 54.6, 71.5, 101.3), y = c(21.25, 3.1, 18.15, 9.7, 21.1))
     )
 })
+
+
+test_that("Error when x and y doesn't match", {
+    x <- 1:3
+    y <- 1:4
+
+    expect_error(RDP(x, y, 5), class = "std::invalid_argument")
+    # expect_error(RDP(x, y, 5), regexp = "x and y vectors must be of equal length")
+})
+
+
+test_that("Epsilon should be positive", {
+    x <- 1:9
+    y <- 1:9
+
+    expect_error(RDP(x, y, -1), class = "std::invalid_argument")
+})
