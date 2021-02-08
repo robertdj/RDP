@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-RDP <- function(x, y, epsilon) {
-    .Call(`_RDP_RDP`, x, y, epsilon)
+RamerDouglasPeucker <- function(x, y, epsilon) {
+    .Call(`_RDP_RamerDouglasPeucker`, x, y, epsilon)
 }
 
