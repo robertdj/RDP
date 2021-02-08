@@ -7,13 +7,13 @@ The {RDP} package contains an implementation of the [Ramer–Douglas–Peucker a
 ](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm) for reducing the number of points in a curve.
 
 There are already a number of R packages with similar implementations.
-However, these package offer much more functionality and have a large number of dependencies.
+However, these packages offer much more functionality and have a large number of dependencies.
 My aim is to have minimal dependencies and a single purpose.
 
 
 ## Installation
 
-The package is only available on GitHub and can be installed with the [remotes package]() using this command:
+The package is only available on GitHub and can be installed with the [remotes package](https://remotes.r-lib.org) using this command:
 
 ``` r
 remotes::install_github("robertdj/RDP")
