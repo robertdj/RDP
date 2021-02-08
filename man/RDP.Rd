@@ -7,14 +7,14 @@
 RDP(x, y, epsilon)
 }
 \arguments{
-\item{x}{The \code{x} values}
+\item{x}{The \code{x} values of the curve.}
 
-\item{y}{The \code{y} values}
+\item{y}{The \code{y} values of the curve.}
 
-\item{epsilon}{The}
+\item{epsilon}{The threshold for filtering outliers from the simplified curve.}
 }
 \value{
-The \code{x} and \code{y} values.
+The \code{x} and \code{y} values of the simplified curve.
 }
 \description{
 The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
