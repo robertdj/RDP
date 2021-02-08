@@ -2,11 +2,11 @@
 % Please edit documentation in R/RDP-package.R
 \docType{package}
 \name{RDP-package}
+\alias{RDP}
 \alias{RDP-package}
-\alias{_PACKAGE}
 \title{\code{RDP}  package}
 \description{
-Implementation of the Ramer-Douglas-Peucker algorithm.
+Implementation of the \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-Douglas-Peucker algorithm}.
 }
 \author{
 \strong{Maintainer}: Robert Dahl Jacobsen \email{git@dahl-jacobsen.dk}

@@ -1,10 +1,9 @@
 #' `RDP`  package
 #'
-#' Implementation of the Ramer-Douglas-Peucker algorithm.
+#' Implementation of the [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm).
 #'
 #' @docType package
 #' @name RDP-package
-#' @aliases RDP-package
 "_PACKAGE"
 
 ## usethis namespace: start
