@@ -1,6 +1,6 @@
 Package: RDP
 Title: The Ramer-Douglas-Peucker Algorithm
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
 Description: Implementation of the Ramer-Douglas-Peucker algorithm.
 License: GPL-3
