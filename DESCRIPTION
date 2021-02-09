@@ -1,5 +1,5 @@
 Package: RDP
-Title: Implementation of the Ramer-Douglas-Peucker Algorithm
+Title: The Ramer-Douglas-Peucker Algorithm
 Version: 0.1.0
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
 Description: Implementation of the Ramer-Douglas-Peucker algorithm.
@@ -9,8 +9,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat,
-    covr
+    testthat
 LinkingTo: 
     Rcpp
 Imports: 
