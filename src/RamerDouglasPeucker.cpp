@@ -46,7 +46,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
     size_t index = 0;
 
     size_t end = pointList.size() - 1;
-    for (auto i = 1; i < end; i++)
+    for (size_t i = 1; i < end; i++)
     {
         double d = PerpendicularDistanceSquared(pointList[i], pointList[0], pointList[end]);
         if (d > dmax)
@@ -107,7 +107,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
 
     std::vector<Point> points(nx);
 
-    for (auto i = 0; i < nx; i++) {
+    for (R_xlen_t i = 0; i < nx; i++) {
         points[i] = Point(x[i], y[i]);
     }
 
@@ -119,7 +119,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     std::vector<double> xOut(nOut);
     std::vector<double> yOut(nOut);
 
-    for (auto i = 0; i < nOut; i++) {
+    for (size_t i = 0; i < nOut; i++) {
         xOut[i] = pointsOut[i].first;
         yOut[i] = pointsOut[i].second;
     }
