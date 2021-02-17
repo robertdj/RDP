@@ -1,6 +1,4 @@
 #include <Rcpp.h>
-using namespace Rcpp;
-
 #include <cmath>
 
 typedef std::pair<double, double> Point;
