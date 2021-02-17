@@ -107,7 +107,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
 
     std::vector<Point> points(nx);
 
-    for (R_xlen_t i = 0; i < nx; i++) {
+    for (R_xlen_t i = 0; i < nx; i++)
+    {
         points[i] = Point(x[i], y[i]);
     }
 
@@ -119,7 +120,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     std::vector<double> xOut(nOut);
     std::vector<double> yOut(nOut);
 
-    for (size_t i = 0; i < nOut; i++) {
+    for (size_t i = 0; i < nOut; i++)
+    {
         xOut[i] = pointsOut[i].first;
         yOut[i] = pointsOut[i].second;
     }
