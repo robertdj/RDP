@@ -8,7 +8,7 @@
 The {RDP} package contains an implementation of the [Ramer–Douglas–Peucker algorithm
 ](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm) for reducing the number of points in a curve.
 
-There are already R packages that offer implementations of the Ramer–Douglas–Peucker algorithm, but here there is only a single dependency and it executes pretty fast.
+There are other R packages that offer implementations of the Ramer–Douglas–Peucker algorithm, but {RDP} has only a single dependency and it executes pretty fast.
 
 
 ## Installation
