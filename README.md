@@ -1,4 +1,5 @@
-# RDP
+RDP
+===
 
 <!-- badges: start -->
 [![R build status](https://github.com/robertdj/RDP/workflows/R-CMD-check/badge.svg)](https://github.com/robertdj/RDP/actions)
