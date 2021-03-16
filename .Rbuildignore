@@ -1,5 +1,6 @@
 ^RDP\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^README\.md$
 ^\.github$
 ^codecov\.yml$

@@ -9,7 +9,7 @@
 #' @param y The `y` values of the curve.
 #' @param epsilon The threshold for filtering outliers from the simplified curve.
 #'
-#' @return The `x` and `y` values of the simplified curve.
+#' @return A `data.frame` with `x` and `y` values of the simplified curve.
 #'
 #' @export
 #'

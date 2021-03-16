@@ -8,6 +8,13 @@
 \description{
 Implementation of the \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-Douglas-Peucker algorithm}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/robertdj/RDP}
+}
+
+}
 \author{
 \strong{Maintainer}: Robert Dahl Jacobsen \email{git@dahl-jacobsen.dk}
 
