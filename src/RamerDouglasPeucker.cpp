@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <cmath>
 
 typedef std::pair<double, double> Point;
 
@@ -9,7 +8,7 @@ double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, con
     double dy = lineEnd.second - lineStart.second;
 
     // Normalise
-    double mag = pow(dx*dx + dy*dy, 0.5);
+    double mag = sqrt(dx*dx + dy*dy);
     if (mag > 0.0)
     {
         dx /= mag;
