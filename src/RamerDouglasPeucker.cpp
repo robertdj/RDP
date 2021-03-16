@@ -88,12 +88,13 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
 //' @param y The `y` values of the curve.
 //' @param epsilon The threshold for filtering outliers from the simplified curve.
 //'
-//' @return The `x` and `y` values of the simplified curve.
+//' @return A `data.frame` with `x` and `y` values of the simplified curve.
 //'
 //' @export
 //'
 // [[Rcpp::export]]
-Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon) {
+Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon)
+{
     auto nx = x.length();
 
     if (nx != y.length())

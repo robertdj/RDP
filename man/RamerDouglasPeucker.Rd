@@ -14,7 +14,7 @@ RamerDouglasPeucker(x, y, epsilon)
 \item{epsilon}{The threshold for filtering outliers from the simplified curve.}
 }
 \value{
-The \code{x} and \code{y} values of the simplified curve.
+A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
 }
 \description{
 The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
