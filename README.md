@@ -31,10 +31,9 @@ remotes::install_github("robertdj/RDP")
 
 # Example
 
-There is a single function in the {RDP} package. Here is a comparison
-(using the [{bench} package](https://bench.r-lib.org)) of the execution
-speed and memory usage between the {RDP} implementation and a pure R
-implementation in the [kmlShape
+There is a single function in the {RDP} package. Here is a comparison of
+the execution speed and memory usage of the {RDP} implementation and a
+pure R implementation from the [kmlShape
 package](https://cran.r-project.org/package=kmlShape):
 
 ``` r
@@ -53,8 +52,11 @@ bench::mark(
 #> 2 kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)   5.32s   5.32s   37.67MB
 ```
 
-Here {RDP} is rougly 1000 times faster and using 10 % of the memory. The
-outputs are identical (according to `dplyr::all_equal`).
+In this example we see from the [{bench}
+package](https://bench.r-lib.org) summary that {RDP} is roughly 1000
+times faster and using 10 % of the memory.
+
+The outputs are identical (according to `dplyr::all_equal`).
 
 # Acknowledgements
 
