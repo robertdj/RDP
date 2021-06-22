@@ -7,9 +7,9 @@
 RamerDouglasPeucker(x, y, epsilon)
 }
 \arguments{
-\item{x}{The \code{x} values of the curve.}
+\item{x}{The \code{x} values of the curve as a vector.}
 
-\item{y}{The \code{y} values of the curve.}
+\item{y}{The \code{y} values of the curve as a vector.}
 
 \item{epsilon}{The threshold for filtering outliers from the simplified curve.}
 }
@@ -18,4 +18,8 @@ A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
 }
 \description{
 The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
+}
+\examples{
+RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
+
 }

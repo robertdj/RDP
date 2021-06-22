@@ -5,11 +5,14 @@
 #'
 #' The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
 #'
-#' @param x The `x` values of the curve.
-#' @param y The `y` values of the curve.
+#' @param x The `x` values of the curve as a vector.
+#' @param y The `y` values of the curve as a vector.
 #' @param epsilon The threshold for filtering outliers from the simplified curve.
 #'
 #' @return A `data.frame` with `x` and `y` values of the simplified curve.
+#'
+#' @examples
+#' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
 #'
 #' @export
 #'
