@@ -40,23 +40,20 @@ package](https://cran.r-project.org/package=kmlShape):
 x <- as.double(0:10^4)
 y <- rnorm(length(x))
 bench::mark(
-    RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),
-    kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)
-) %>% 
-    dplyr::select(expression, min, median, mem_alloc)
+    RDP = RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),
+    kmlShape = kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)
+)
 #> Warning: Some expressions had a GC in every iteration; so filtering is disabled.
-#> # A tibble: 2 x 4
-#>   expression                                               min  median mem_alloc
-#>   <bch:expr>                                           <bch:t> <bch:t> <bch:byt>
-#> 1 RDP::RamerDouglasPeucker(x, y, epsilon = 0.1)         3.86ms  4.23ms    3.55MB
-#> 2 kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)   5.32s   5.32s   37.67MB
+#> # A tibble: 2 x 6
+#>   expression      min   median `itr/sec` mem_alloc `gc/sec`
+#>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+#> 1 RDP          3.96ms   4.32ms   206.        5.3MB      0  
+#> 2 kmlShape      5.44s    5.44s     0.184    35.7MB     12.5
 ```
 
 In this example we see from the [{bench}
-package](https://bench.r-lib.org) summary that {RDP} is roughly 1000
+package](https://bench.r-lib.org) summary that {RDP} is more than 1000
 times faster and using 10 % of the memory.
-
-The outputs are identical (according to `dplyr::all_equal`).
 
 # Acknowledgements
 

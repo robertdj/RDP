@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r options, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -46,15 +46,12 @@ Here is a comparison of the execution speed and memory usage of the {RDP} implem
 x <- as.double(0:10^4)
 y <- rnorm(length(x))
 bench::mark(
-    RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),
-    kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)
-) %>% 
-    dplyr::select(expression, min, median, mem_alloc)
+    RDP = RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),
+    kmlShape = kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)
+)
 ```
 
-In this example we see from the [{bench} package](https://bench.r-lib.org) summary that {RDP} is roughly 1000 times faster and using 10 % of the memory.
-
-The outputs are identical (according to `dplyr::all_equal`).
+In this example we see from the [{bench} package](https://bench.r-lib.org) summary that {RDP} is more than 1000 times faster and using 10 % of the memory.
 
 
 # Acknowledgements
