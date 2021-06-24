@@ -3,8 +3,8 @@ Title: The Ramer-Douglas-Peucker Algorithm
 Version: 0.1.4
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
 Description: Pretty fast implementation of the Ramer-Douglas-Peucker algorithm for reducing the number of points on a 2D curve.
-    Urs Ramer (1972), "An iterative procedure for the polygonal approximation of plane curves" <10.1016/S0146-664X(72)80017-0>.
-    David H. Douglas and Thomas K. Peucker (1973), "Algorithms for the Reduction of the Number of Points Required to Represent a Digitized Line or its Caricature" <10.3138/FM57-6770-U75U-7727>.
+    Urs Ramer (1972), "An iterative procedure for the polygonal approximation of plane curves" <doi:10.1016/S0146-664X(72)80017-0>.
+    David H. Douglas and Thomas K. Peucker (1973), "Algorithms for the Reduction of the Number of Points Required to Represent a Digitized Line or its Caricature" <doi:10.3138/FM57-6770-U75U-7727>.
 License: GPL-3
 URL: https://github.com/robertdj/RDP
 Encoding: UTF-8
