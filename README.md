@@ -22,7 +22,14 @@ and it executes pretty fast.
 
 # Installation
 
-{RDP} is only available on GitHub and can be installed with the [remotes
+{RDP} is [available on CRAN](https://cran.r-project.org/package=RDP) and
+can be installed with the command
+
+``` r
+install.packages("RDP")
+```
+
+{RDP} can also be installed from GitHub with the [{remotes}
 package](https://remotes.r-lib.org) using this command:
 
 ``` r
@@ -33,7 +40,7 @@ remotes::install_github("robertdj/RDP")
 
 There is a single function in the {RDP} package. Here is a comparison of
 the execution speed and memory usage of the {RDP} implementation and a
-pure R implementation from the [kmlShape
+pure R implementation from the [{kmlShape}
 package](https://cran.r-project.org/package=kmlShape):
 
 ``` r

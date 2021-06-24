@@ -30,7 +30,13 @@ There are other R packages that offer implementations of the Ramer–Douglas–P
 
 # Installation
 
-{RDP} is only available on GitHub and can be installed with the [remotes package](https://remotes.r-lib.org) using this command:
+{RDP} is [available on CRAN](https://cran.r-project.org/package=RDP) and can be installed with the command
+
+``` r
+install.packages("RDP")
+```
+
+{RDP} can also be installed from GitHub with the [{remotes} package](https://remotes.r-lib.org) using this command:
 
 ``` r
 remotes::install_github("robertdj/RDP")
@@ -40,7 +46,7 @@ remotes::install_github("robertdj/RDP")
 # Example
 
 There is a single function in the {RDP} package.
-Here is a comparison of the execution speed and memory usage of the {RDP} implementation and a pure R implementation from the [kmlShape package](https://cran.r-project.org/package=kmlShape):
+Here is a comparison of the execution speed and memory usage of the {RDP} implementation and a pure R implementation from the [{kmlShape} package](https://cran.r-project.org/package=kmlShape):
 
 ```{r timing}
 x <- as.double(0:10^4)
@@ -51,7 +57,7 @@ bench::mark(
 )
 ```
 
-In this example we see from the [{bench} package](https://bench.r-lib.org) summary that {RDP} is more than 1000 times faster and using 10 % of the memory.
+In this example we see from the [{bench} package](https://bench.r-lib.org) summary that {RDP} is more than 1000 times faster and use only a fraction of the memory.
 
 
 # Acknowledgements
