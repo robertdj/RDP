@@ -104,7 +104,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         throw std::invalid_argument("x and y vectors must be of equal length");
 
     if (epsilon <= 0)
-        throw std::invalid_argument("epsilon must be positive");
+        throw std::domain_error("epsilon must be positive");
 
     std::vector<Point> points(nx);
     for (R_xlen_t i = 0; i < nx; i++)
