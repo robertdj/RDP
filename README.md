@@ -60,7 +60,7 @@ bench::mark(
 
 In this example we see from the [{bench}
 package](https://bench.r-lib.org) summary that {RDP} is more than 1000
-times faster and using 10 % of the memory.
+times faster and use only a fraction of the memory.
 
 # Acknowledgements
 
