@@ -55,7 +55,7 @@ test_that("Bigger example", {
 })
 
 
-test_that("Error when x and y doesn't match", {
+test_that("Error when x and y have different lengths", {
     expect_error(RamerDouglasPeucker(1:3, 1:4, 5), class = "std::invalid_argument")
 })
 
