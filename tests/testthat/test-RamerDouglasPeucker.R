@@ -62,4 +62,11 @@ test_that("Error when x and y doesn't match", {
 
 test_that("Epsilon should be positive", {
     expect_error(RamerDouglasPeucker(1:3, 1:3, -1), class = "std::domain_error")
+    expect_error(RamerDouglasPeucker(1:3, 1:3, NA_real_), class = "std::domain_error")
+})
+
+
+test_that("Error with NA in coordinates", {
+    expect_error(RamerDouglasPeucker(c(1, NA_real_, 3), 1:3, 1), class = "std::invalid_argument")
+    expect_error(RamerDouglasPeucker(1:3, c(1, NA_real_, 3), 1), class = "std::invalid_argument")
 })
