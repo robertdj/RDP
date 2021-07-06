@@ -49,7 +49,7 @@ There is a single function in the {RDP} package.
 Here is a comparison of the execution speed and memory usage of the {RDP} implementation and a pure R implementation from the [{kmlShape} package](https://cran.r-project.org/package=kmlShape):
 
 ```{r timing}
-x <- as.double(0:10^4)
+x <- as.double(1:10^4)
 y <- rnorm(length(x))
 bench::mark(
     RDP = RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),

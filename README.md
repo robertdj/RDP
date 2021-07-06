@@ -44,7 +44,7 @@ pure R implementation from the [{kmlShape}
 package](https://cran.r-project.org/package=kmlShape):
 
 ``` r
-x <- as.double(0:10^4)
+x <- as.double(1:10^4)
 y <- rnorm(length(x))
 bench::mark(
     RDP = RDP::RamerDouglasPeucker(x, y, epsilon = 0.1),

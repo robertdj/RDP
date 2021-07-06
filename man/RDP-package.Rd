@@ -16,6 +16,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Robert Dahl Jacobsen \email{git@dahl-jacobsen.dk}
+\strong{Maintainer}: Robert Dahl Jacobsen \email{cran@dahl-jacobsen.dk}
 
 }
