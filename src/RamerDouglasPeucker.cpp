@@ -7,14 +7,6 @@ double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, con
     double dx = lineEnd.first - lineStart.first;
     double dy = lineEnd.second - lineStart.second;
 
-    // Normalise
-    double mag = sqrt(dx*dx + dy*dy);
-    if (mag > 0.0)
-    {
-        dx /= mag;
-        dy /= mag;
-    }
-
     double pvx = pt.first - lineStart.first;
     double pvy = pt.second - lineStart.second;
 
@@ -24,6 +16,13 @@ double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, con
     // Scale line direction vector
     double dsx = pvdot * dx;
     double dsy = pvdot * dy;
+
+    double lineLengthSquared = dx*dx + dy*dy;
+    if (lineLengthSquared > 0)
+    {
+        dsx /= lineLengthSquared;
+        dsy /= lineLengthSquared;
+    }
 
     // Subtract this from pv
     double ax = pvx - dsx;
