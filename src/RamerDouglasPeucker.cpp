@@ -2,33 +2,26 @@
 
 typedef std::pair<double, double> Point;
 
+// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, const Point &lineEnd)
 {
-    double dx = lineEnd.first - lineStart.first;
-    double dy = lineEnd.second - lineStart.second;
+    double xLineDiff = lineEnd.first - lineStart.first;
+    double yLineDiff = lineEnd.second - lineStart.second;
 
-    double pvx = pt.first - lineStart.first;
-    double pvy = pt.second - lineStart.second;
+    double xPointToLineStart = pt.first - lineStart.first;
+    double yPointToLineStart = pt.second - lineStart.second;
 
-    // Get dot product (project pv onto normalized direction)
-    double pvdot = dx * pvx + dy * pvy;
-
-    // Scale line direction vector
-    double dsx = pvdot * dx;
-    double dsy = pvdot * dy;
-
-    double lineLengthSquared = dx*dx + dy*dy;
-    if (lineLengthSquared > 0)
+    double lineLengthSquared = xLineDiff * xLineDiff + yLineDiff * yLineDiff;
+    if (lineLengthSquared == 0)
     {
-        dsx /= lineLengthSquared;
-        dsy /= lineLengthSquared;
+        // The line is just a point
+        return xPointToLineStart * xPointToLineStart + yPointToLineStart * yPointToLineStart;
     }
 
-    // Subtract this from pv
-    double ax = pvx - dsx;
-    double ay = pvy - dsy;
+    double doubleTriangleArea = yLineDiff * xPointToLineStart - xLineDiff * yPointToLineStart;
+    double numerator = doubleTriangleArea * doubleTriangleArea;
 
-    return ax*ax + ay*ay;
+    return numerator / lineLengthSquared;
 }
 
 
