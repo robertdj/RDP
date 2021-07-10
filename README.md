@@ -54,8 +54,8 @@ bench::mark(
 #> # A tibble: 2 x 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 RDP          3.96ms   4.32ms   206.        5.3MB      0  
-#> 2 kmlShape      5.44s    5.44s     0.184    35.7MB     12.5
+#> 1 RDP          2.78ms   3.06ms   282.        5.3MB      0  
+#> 2 kmlShape      5.71s    5.71s     0.175      35MB     11.7
 ```
 
 In this example we see from the [{bench}
@@ -64,9 +64,9 @@ times faster and use only a fraction of the memory.
 
 # Acknowledgements
 
-The C++ code is based on [a Gist from
+The C++ code is originally based on [a Gist from
 TimSC](https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51).
-At the time of implementation the code in the Gist is released under
+At the time of implementation the code in the Gist was released under
 CC0. This makes it [compatible with the
 GPL](https://www.gnu.org/licenses/license-list.en.html#GPLCompatibleLicenses)
 – as is required for compiled code linking against R.

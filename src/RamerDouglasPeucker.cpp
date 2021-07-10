@@ -2,34 +2,26 @@
 
 typedef std::pair<double, double> Point;
 
+// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, const Point &lineEnd)
 {
-    double dx = lineEnd.first - lineStart.first;
-    double dy = lineEnd.second - lineStart.second;
+    double xLineDiff = lineEnd.first - lineStart.first;
+    double yLineDiff = lineEnd.second - lineStart.second;
 
-    // Normalise
-    double mag = sqrt(dx*dx + dy*dy);
-    if (mag > 0.0)
+    double xPointToLineStart = pt.first - lineStart.first;
+    double yPointToLineStart = pt.second - lineStart.second;
+
+    double lineLengthSquared = xLineDiff * xLineDiff + yLineDiff * yLineDiff;
+    if (lineLengthSquared == 0)
     {
-        dx /= mag;
-        dy /= mag;
+        // The line is just a point
+        return xPointToLineStart * xPointToLineStart + yPointToLineStart * yPointToLineStart;
     }
 
-    double pvx = pt.first - lineStart.first;
-    double pvy = pt.second - lineStart.second;
+    double doubleTriangleArea = yLineDiff * xPointToLineStart - xLineDiff * yPointToLineStart;
+    double numerator = doubleTriangleArea * doubleTriangleArea;
 
-    // Get dot product (project pv onto normalized direction)
-    double pvdot = dx * pvx + dy * pvy;
-
-    // Scale line direction vector
-    double dsx = pvdot * dx;
-    double dsy = pvdot * dy;
-
-    // Subtract this from pv
-    double ax = pvx - dsx;
-    double ay = pvy - dsy;
-
-    return ax*ax + ay*ay;
+    return numerator / lineLengthSquared;
 }
 
 
@@ -99,7 +91,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
 Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon)
 {
     if (epsilon <= 0 || Rcpp::NumericVector::is_na(epsilon))
-        throw std::domain_error("epsilon must be positive");
+        throw std::domain_error("epsilon must be a positive number");
 
     R_xlen_t nx = x.length();
     if (nx != y.length())
@@ -114,9 +106,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         points[i] = Point(x[i], y[i]);
     }
 
-    double epsilonSquared = epsilon * epsilon;
     std::vector<Point> pointsOut;
-    RamerDouglasPeuckerCpp(points, epsilonSquared, pointsOut);
+    RamerDouglasPeuckerCpp(points, epsilon * epsilon, pointsOut);
 
     size_t nOut = pointsOut.size();
     std::vector<double> xOut(nOut);
