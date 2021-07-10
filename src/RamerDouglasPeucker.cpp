@@ -98,7 +98,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
 Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon)
 {
     if (epsilon <= 0 || Rcpp::NumericVector::is_na(epsilon))
-        throw std::domain_error("epsilon must be positive");
+        throw std::domain_error("epsilon must be a positive number");
 
     R_xlen_t nx = x.length();
     if (nx != y.length())
@@ -113,9 +113,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         points[i] = Point(x[i], y[i]);
     }
 
-    double epsilonSquared = epsilon * epsilon;
     std::vector<Point> pointsOut;
-    RamerDouglasPeuckerCpp(points, epsilonSquared, pointsOut);
+    RamerDouglasPeuckerCpp(points, epsilon * epsilon, pointsOut);
 
     size_t nOut = pointsOut.size();
     std::vector<double> xOut(nOut);
