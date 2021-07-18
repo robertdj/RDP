@@ -19,7 +19,7 @@ RDP
 
 <!-- badges: start -->
 [![R build status](https://github.com/robertdj/RDP/workflows/R-CMD-check/badge.svg)](https://github.com/robertdj/RDP/actions)
-[![Codecov test coverage](https://codecov.io/gh/robertdj/RDP/branch/master/graph/badge.svg)](https://codecov.io/gh/robertdj/RDP?branch=main)
+[![CRAN status](https://www.r-pkg.org/badges/version/RDP)](https://CRAN.R-project.org/package=RDP)
 <!-- badges: end -->
 
 The {RDP} package contains an implementation of the [Ramer–Douglas–Peucker algorithm
