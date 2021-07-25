@@ -19,9 +19,9 @@ double PerpendicularDistanceSquared(Point pt, Point lineStart, Point lineEnd)
     }
 
     double doubleTriangleArea = yLineDiff * xPointToLineStart - xLineDiff * yPointToLineStart;
-    double numerator = doubleTriangleArea * doubleTriangleArea;
+    double doubleTriangleAreaSquared = doubleTriangleArea * doubleTriangleArea;
 
-    return numerator / lineLengthSquared;
+    return doubleTriangleAreaSquared / lineLengthSquared;
 }
 
 
