@@ -3,7 +3,7 @@
 typedef std::pair<double, double> Point;
 
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
-double PerpendicularDistanceSquared(const Point &pt, const Point &lineStart, const Point &lineEnd)
+double PerpendicularDistanceSquared(Point pt, Point lineStart, Point lineEnd)
 {
     double xLineDiff = lineEnd.first - lineStart.first;
     double yLineDiff = lineEnd.second - lineStart.second;
