@@ -3,7 +3,7 @@
 
 #' Ramer-Douglas-Peucker
 #'
-#' The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
+#' The [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) for reducing the number of points on a curve.
 #'
 #' @param x The `x` values of the curve as a vector.
 #' @param y The `y` values of the curve as a vector.
