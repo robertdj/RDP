@@ -53,9 +53,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
     }
     else
     {
-        // Just return (start and) end points
-        if (indicesToKeep.size() == 0)
-            indicesToKeep.push_back(startIndex);
+        // startIndex is included from the previous run
         indicesToKeep.push_back(endIndex);
     }
 }
@@ -97,6 +95,9 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
 
     std::vector<size_t> indicesToKeep;
     indicesToKeep.reserve(nx);
+    // The first point is always kept
+    indicesToKeep.push_back(0);
+
     RamerDouglasPeuckerCpp(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
 
     size_t nOut = indicesToKeep.size();
