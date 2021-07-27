@@ -25,19 +25,19 @@ double PerpendicularDistanceSquared(Point pt, Point lineStart, Point lineEnd)
 }
 
 
-void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonSquared, std::vector<Point> &out)
+void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
 {
     if (pointList.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
     // Find the point with the maximum distance from line between start and end
     double dmax = 0.0;
-    size_t index = 0;
+    size_t index = startIndex;
 
     size_t end = pointList.size() - 1;
-    for (size_t i = 1; i < end; i++)
+    for (size_t i = startIndex + 1; i < endIndex; i++)
     {
-        double d = PerpendicularDistanceSquared(pointList[i], pointList[0], pointList[end]);
+        double d = PerpendicularDistanceSquared(pointList[i], pointList[startIndex], pointList[endIndex]);
         if (d > dmax)
         {
             index = i;
@@ -45,36 +45,25 @@ void RamerDouglasPeuckerCpp(const std::vector<Point> &pointList, double epsilonS
         }
     }
 
-    // If max distance is greater than epsilon, recursively simplify
     if (dmax > epsilonSquared)
     {
         // Recursive call
-        std::vector<Point> recResults1;
-        std::vector<Point> recResults2;
-        std::vector<Point> firstLine(pointList.begin(), pointList.begin() + index + 1);
-        std::vector<Point> lastLine(pointList.begin() + index, pointList.end());
-        RamerDouglasPeuckerCpp(firstLine, epsilonSquared, recResults1);
-        RamerDouglasPeuckerCpp(lastLine, epsilonSquared, recResults2);
-
-        // Build the result list
-        out.assign(recResults1.begin(), recResults1.end() - 1);
-        out.insert(out.end(), recResults2.begin(), recResults2.end());
-        if (out.size() < 2)
-            throw std::runtime_error("Problem assembling output");
+        RamerDouglasPeuckerCpp(pointList, epsilonSquared, startIndex, index, indicesToKeep);
+        RamerDouglasPeuckerCpp(pointList, epsilonSquared, index, endIndex, indicesToKeep);
     }
     else
     {
-        // Just return start and end points
-        out.clear();
-        out.push_back(pointList[0]);
-        out.push_back(pointList[end]);
+        // Just return (start and) end points
+        if (indicesToKeep.size() == 0)
+            indicesToKeep.push_back(startIndex);
+        indicesToKeep.push_back(endIndex);
     }
 }
 
 
 //' Ramer-Douglas-Peucker
 //'
-//' The Ramer-Douglas-Peucker algorithm for reducing the number of points on a curve.
+//' The [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) for reducing the number of points on a curve.
 //'
 //' @param x The `x` values of the curve as a vector.
 //' @param y The `y` values of the curve as a vector.
@@ -106,17 +95,19 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         points[i] = Point(x[i], y[i]);
     }
 
-    std::vector<Point> pointsOut;
-    RamerDouglasPeuckerCpp(points, epsilon * epsilon, pointsOut);
+    std::vector<size_t> indicesToKeep;
+    indicesToKeep.reserve(nx);
+    RamerDouglasPeuckerCpp(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
 
-    size_t nOut = pointsOut.size();
+    size_t nOut = indicesToKeep.size();
     std::vector<double> xOut(nOut);
     std::vector<double> yOut(nOut);
 
     for (size_t i = 0; i < nOut; i++)
     {
-        xOut[i] = pointsOut[i].first;
-        yOut[i] = pointsOut[i].second;
+        size_t index = indicesToKeep[i];
+        xOut[i] = x[index];
+        yOut[i] = y[index];
     }
 
     return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut);
