@@ -55,6 +55,17 @@ test_that("Bigger example", {
 })
 
 
+test_that("All points kept when epsilon is zero", {
+    x <- c(3.5, 7.3, 23.2, 37.2, 54.6, 62.2, 71.5, 101.3)
+    y <- c(21.25, 12.0, 3.1, 12.07, 18.15, 16.45, 9.7, 21.1)
+
+    expect_equal(
+        RamerDouglasPeucker(x, y, 0),
+        data.frame(x = x, y = y)
+    )
+})
+
+
 test_that("Error when x and y have different lengths", {
     expect_error(RamerDouglasPeucker(1:3, 1:4, 5), class = "std::invalid_argument")
 })
