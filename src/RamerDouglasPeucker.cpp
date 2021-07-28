@@ -46,25 +46,25 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
         throw std::invalid_argument("Not enough points to simplify");
 
     // Find the point with the maximum distance from line between start and end
-    double dmax = 0.0;
-    size_t index = startIndex;
+    double maxDistance = 0.0;
+    size_t maxDistanceIndex = startIndex;
 
     size_t end = pointList.size() - 1;
     for (size_t i = startIndex + 1; i < endIndex; i++)
     {
-        double d = PerpendicularDistanceSquared(pointList[i], pointList[startIndex], pointList[endIndex]);
-        if (d > dmax)
+        double thisDistance = PerpendicularDistanceSquared(pointList[i], pointList[startIndex], pointList[endIndex]);
+        if (thisDistance > maxDistance)
         {
-            index = i;
-            dmax = d;
+            maxDistanceIndex = i;
+            maxDistance = thisDistance;
         }
     }
 
-    if (dmax > epsilonSquared)
+    if (maxDistance > epsilonSquared)
     {
         // Recursive call
-        RamerDouglasPeuckerCpp(pointList, epsilonSquared, startIndex, index, indicesToKeep);
-        RamerDouglasPeuckerCpp(pointList, epsilonSquared, index, endIndex, indicesToKeep);
+        RamerDouglasPeuckerCpp(pointList, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
+        RamerDouglasPeuckerCpp(pointList, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
     }
     else
     {
