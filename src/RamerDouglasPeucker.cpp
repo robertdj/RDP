@@ -1,4 +1,6 @@
-#include <Rcpp.h>
+#include <vector>
+#include <limits>
+#include <stdexcept>
 
 struct Point2D
 {
@@ -25,7 +27,7 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
     Point2D pointToLineStart = pt - lineStart;
 
     double lineLengthSquared = lineDiff.abs2();
-    if (lineLengthSquared == 0)
+    if (lineLengthSquared < std::numeric_limits<double>::epsilon())
     {
         // The line is just a point
         return pointToLineStart.abs2();
@@ -67,7 +69,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
     else
     {
         // startIndex is included from the previous run because we execute sequentially with the
-        // first parts first
+        // lower parts first
         indicesToKeep.push_back(endIndex);
     }
 }
