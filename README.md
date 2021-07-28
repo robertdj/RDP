@@ -54,8 +54,8 @@ bench::mark(
 #> # A tibble: 2 x 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 RDP        832.52µs      1ms   897.       5.28MB     4.00
-#> 2 kmlShape      5.14s    5.14s     0.194   35.74MB    13.4
+#> 1 RDP        822.57µs  938.5µs   945.       5.28MB     4.00
+#> 2 kmlShape      5.11s    5.11s     0.196   35.74MB    13.5
 ```
 
 In this example we see from the [{bench}
