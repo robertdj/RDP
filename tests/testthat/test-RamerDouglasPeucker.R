@@ -66,6 +66,11 @@ test_that("All points kept when epsilon is zero", {
 })
 
 
+test_that("Error when there is only a single point", {
+    expect_error(RamerDouglasPeucker(1, 1, 5), class = "std::invalid_argument")
+})
+
+
 test_that("Error when x and y have different lengths", {
     expect_error(RamerDouglasPeucker(1:3, 1:4, 5), class = "std::invalid_argument")
 })
