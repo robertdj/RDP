@@ -26,13 +26,14 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     if (nx != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
-    std::vector<Point2D> points(nx);
+    std::vector<rdp::Point2D> points;
+    points.reserve(nx);
     for (R_xlen_t i = 0; i < nx; i++)
     {
         if (Rcpp::NumericVector::is_na(x[i]) || Rcpp::NumericVector::is_na(y[i]))
             throw std::invalid_argument("NA values are not allowed in coordinates");
 
-        points[i] = Point2D{x[i], y[i]};
+        points.push_back({x[i], y[i]});
     }
 
     std::vector<size_t> indicesToKeep;
