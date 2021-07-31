@@ -2,15 +2,11 @@
 #include <limits>
 #include <stdexcept>
 
+namespace rdp {
 struct Point2D
 {
     double x;
     double y;
-
-    double abs2()
-    {
-        return x * x + y * y;
-    }
 };
 
 
@@ -20,17 +16,25 @@ Point2D operator-(Point2D a, Point2D b)
 }
 
 
+double abs2(Point2D p)
+{
+    return p.x * p.x + p.y * p.y;
+}
+} // end namespace rdp
+
+using namespace rdp;
+
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineEnd)
 {
     Point2D lineDiff = lineEnd - lineStart;
     Point2D pointToLineStart = pt - lineStart;
 
-    double lineLengthSquared = lineDiff.abs2();
+    double lineLengthSquared = abs2(lineDiff);
     if (lineLengthSquared < std::numeric_limits<double>::epsilon())
     {
         // The line is just a point
-        return pointToLineStart.abs2();
+        return abs2(pointToLineStart);
     }
 
     double doubleTriangleArea = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
