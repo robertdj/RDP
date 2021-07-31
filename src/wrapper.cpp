@@ -26,27 +26,29 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     if (nx != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
-    std::vector<Point2D> points(nx);
+    std::vector<rdp::Point2D> points;
+    points.reserve(nx);
     for (R_xlen_t i = 0; i < nx; i++)
     {
         if (Rcpp::NumericVector::is_na(x[i]) || Rcpp::NumericVector::is_na(y[i]))
             throw std::invalid_argument("NA values are not allowed in coordinates");
 
-        points[i] = Point2D{x[i], y[i]};
+        points.push_back({x[i], y[i]});
     }
 
+    // We don't know the number of indices to keep a priori, but the first point is always kept
     std::vector<size_t> indicesToKeep;
     indicesToKeep.reserve(nx);
-    // The first point is always kept
     indicesToKeep.push_back(0);
 
     RamerDouglasPeuckerCpp(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
 
-    size_t nOut = indicesToKeep.size();
-    std::vector<double> xOut(nOut);
-    std::vector<double> yOut(nOut);
+    // Here initialization is faster than reserve + push_back
+    size_t nIndices = indicesToKeep.size();
+    std::vector<double> xOut(nIndices);
+    std::vector<double> yOut(nIndices);
 
-    for (size_t i = 0; i < nOut; i++)
+    for (size_t i = 0; i < nIndices; i++)
     {
         size_t index = indicesToKeep[i];
         xOut[i] = x[index];
