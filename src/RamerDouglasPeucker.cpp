@@ -1,5 +1,4 @@
 #include <vector>
-#include <limits>
 #include <stdexcept>
 
 namespace rdp {
@@ -31,7 +30,7 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
     Point2D pointToLineStart = pt - lineStart;
 
     double lineLengthSquared = abs2(lineDiff);
-    if (lineLengthSquared < std::numeric_limits<double>::epsilon())
+    if (lineLengthSquared == 0.0)
     {
         // The line is just a point
         return abs2(pointToLineStart);
