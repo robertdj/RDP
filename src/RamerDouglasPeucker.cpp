@@ -49,11 +49,13 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
     if (pointList.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
+    if (startIndex > endIndex)
+        throw std::invalid_argument("Start index cannot be bigger than end index");
+
     // Find the point with the maximum distance from line between start and end
     double maxDistance = 0.0;
     size_t maxDistanceIndex = startIndex;
 
-    size_t end = pointList.size() - 1;
     for (size_t i = startIndex + 1; i < endIndex; i++)
     {
         double thisDistance = PerpendicularDistanceSquared(pointList[i], pointList[startIndex], pointList[endIndex]);
@@ -73,7 +75,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
     else
     {
         // startIndex is included from the previous run because we execute sequentially with the
-        // lower parts first
+        // lower parts of the list first
         indicesToKeep.push_back(endIndex);
     }
 }
