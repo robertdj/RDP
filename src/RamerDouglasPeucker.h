@@ -7,8 +7,8 @@ struct Point2D
     double x;
     double y;
 };
-}
 
-void RamerDouglasPeuckerCpp(const std::vector<rdp::Point2D> &pointList, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep);
+void RamerDouglasPeucker(const std::vector<rdp::Point2D> &pointList, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep);
+}
 
 #endif

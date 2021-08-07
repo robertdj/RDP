@@ -41,7 +41,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     indicesToKeep.reserve(nx);
     indicesToKeep.push_back(0);
 
-    RamerDouglasPeuckerCpp(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
+    rdp::RamerDouglasPeucker(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
 
     // Here initialization is faster than reserve + push_back
     size_t nIndices = indicesToKeep.size();

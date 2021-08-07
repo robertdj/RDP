@@ -19,9 +19,7 @@ double abs2(Point2D p)
 {
     return p.x * p.x + p.y * p.y;
 }
-} // end namespace rdp
 
-using namespace rdp;
 
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineEnd)
@@ -68,8 +66,8 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
     if (maxDistance > epsilonSquared)
     {
         // Recursive call
-        RamerDouglasPeuckerCpp(pointList, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
-        RamerDouglasPeuckerCpp(pointList, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
+        RamerDouglasPeucker(pointList, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
+        RamerDouglasPeucker(pointList, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
     }
     else
     {
@@ -78,3 +76,4 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
         indicesToKeep.push_back(endIndex);
     }
 }
+} // end namespace rdp
