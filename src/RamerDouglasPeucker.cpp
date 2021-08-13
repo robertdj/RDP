@@ -34,10 +34,10 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
         return abs2(pointToLineStart);
     }
 
-    double doubleTriangleArea = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
-    double doubleTriangleAreaSquared = doubleTriangleArea * doubleTriangleArea;
+    double determinant = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
+    double determinantSquared = determinant * determinant;
 
-    return doubleTriangleAreaSquared / lineLengthSquared;
+    return determinantSquared / lineLengthSquared;
 }
 
 
