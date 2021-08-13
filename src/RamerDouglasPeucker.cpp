@@ -1,5 +1,6 @@
-#include <vector>
+#include <cassert>
 #include <stdexcept>
+#include <vector>
 
 namespace rdp {
 struct Point2D
@@ -47,8 +48,7 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
     if (points.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
-    if (startIndex > endIndex)
-        throw std::invalid_argument("Start index cannot be bigger than end index");
+    assert(startIndex <= endIndex && "Start index cannot be bigger than end index");
 
     // Find the point with the maximum distance from line between start and end
     double maxDistance = 0.0;
