@@ -41,9 +41,10 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 }
 
 
-void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
+// `indicesToKeep` should be initialized with a 0 in the first entry.
+void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
 {
-    if (pointList.size() < 2)
+    if (points.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
     if (startIndex > endIndex)
@@ -55,7 +56,7 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
 
     for (size_t i = startIndex + 1; i < endIndex; i++)
     {
-        double thisDistance = PerpendicularDistanceSquared(pointList[i], pointList[startIndex], pointList[endIndex]);
+        double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
         if (thisDistance > maxDistance)
         {
             maxDistanceIndex = i;
@@ -66,8 +67,8 @@ void RamerDouglasPeuckerCpp(const std::vector<Point2D> &pointList, double epsilo
     if (maxDistance > epsilonSquared)
     {
         // Recursive call
-        RamerDouglasPeucker(pointList, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
-        RamerDouglasPeucker(pointList, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
+        RamerDouglasPeucker(points, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
+        RamerDouglasPeucker(points, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
     }
     else
     {
