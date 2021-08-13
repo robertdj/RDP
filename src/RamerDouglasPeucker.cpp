@@ -48,13 +48,13 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
     if (points.size() < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
-    assert(startIndex <= endIndex && "Start index cannot be bigger than end index");
+    assert(startIndex < endIndex && "Start index must be smaller than end index");
 
     // Find the point with the maximum distance from line between start and end
     double maxDistance = 0.0;
     size_t maxDistanceIndex = startIndex;
 
-    for (size_t i = startIndex + 1; i < endIndex; i++)
+    for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
         double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
         if (thisDistance > maxDistance)

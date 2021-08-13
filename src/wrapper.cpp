@@ -31,7 +31,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
 
     std::vector<rdp::Point2D> points;
     points.reserve(nx);
-    for (R_xlen_t i = 0; i < nx; i++)
+    for (R_xlen_t i = 0; i != nx; ++i)
     {
         if (Rcpp::NumericVector::is_na(x[i]) || Rcpp::NumericVector::is_na(y[i]))
             throw std::invalid_argument("NA values are not allowed in coordinates");
@@ -51,7 +51,7 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     std::vector<double> xOut(nIndices);
     std::vector<double> yOut(nIndices);
 
-    for (size_t i = 0; i < nIndices; i++)
+    for (size_t i = 0; i != nIndices; ++i)
     {
         size_t index = indicesToKeep[i];
         xOut[i] = x[index];
