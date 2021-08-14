@@ -69,8 +69,9 @@ test_that("Bigger example", {
 })
 
 
-test_that("Error when there is only a single point", {
+test_that("Error when there are too few points", {
     expect_error(RamerDouglasPeucker(1, 1, 5), class = "std::invalid_argument")
+    expect_error(RamerDouglasPeucker(numeric(0), numeric(0), 5), class = "std::invalid_argument")
 })
 
 
