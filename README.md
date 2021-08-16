@@ -5,10 +5,12 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/robertdj/RDP/workflows/R-CMD-check/badge.svg)](https://github.com/robertdj/RDP/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/RDP)](https://CRAN.R-project.org/package=RDP)
+[![R build
+status](https://github.com/robertdj/RDP/workflows/R-CMD-check/badge.svg)](https://github.com/robertdj/RDP/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/robertdj/RDP/branch/master/graph/badge.svg)](https://codecov.io/gh/robertdj/RDP?branch=master)
 <!-- badges: end -->
 
 The {RDP} package contains an implementation of the
