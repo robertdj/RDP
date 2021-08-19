@@ -22,16 +22,16 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     if (epsilon < 0 || Rcpp::NumericVector::is_na(epsilon))
         throw std::domain_error("epsilon must be a non-negative number");
 
-    R_xlen_t nx = x.length();
-    if (nx != y.length())
+    R_xlen_t nPoints = x.length();
+    if (nPoints != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
-    if (nx < 2)
+    if (nPoints < 2)
         throw std::invalid_argument("Not enough points to simplify");
 
     std::vector<rdp::Point2D> points;
-    points.reserve(nx);
-    for (R_xlen_t i = 0; i != nx; ++i)
+    points.reserve(nPoints);
+    for (R_xlen_t i = 0; i != nPoints; ++i)
     {
         if (Rcpp::NumericVector::is_na(x[i]) || Rcpp::NumericVector::is_na(y[i]))
             throw std::invalid_argument("NA values are not allowed in coordinates");
@@ -41,10 +41,10 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
 
     // We don't know the number of indices to keep a priori, but the first point is always kept
     std::vector<size_t> indicesToKeep;
-    indicesToKeep.reserve(nx);
+    indicesToKeep.reserve(nPoints);
     indicesToKeep.push_back(0);
 
-    rdp::RamerDouglasPeucker(points, epsilon * epsilon, 0, nx - 1, indicesToKeep);
+    rdp::RamerDouglasPeucker(points, epsilon * epsilon, 0, nPoints - 1, indicesToKeep);
 
     // Here initialization is faster than reserve + push_back
     size_t nIndices = indicesToKeep.size();
