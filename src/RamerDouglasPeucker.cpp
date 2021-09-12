@@ -48,7 +48,7 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
                          size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
-    assert(endIndex < points.size() && "End index is larger than number of points");
+    assert(endIndex < points.size() && "End index is larger than the number of points");
     // The inequalities 0 <= startIndex < endIndex < points.size() imply that points.size() >= 2
     assert(epsilonSquared >= 0 && "epsilonSquared must be non-negative");
 
