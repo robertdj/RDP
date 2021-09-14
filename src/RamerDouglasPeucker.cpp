@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <vector>
 
+
 namespace rdp {
 struct Point2D
 {
@@ -43,12 +44,18 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 
 
 // `indicesToKeep` should be initialized with a 0 in the first entry.
-void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared, size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
+void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared,
+                         size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
 {
-    if (points.size() < 2)
-        throw std::invalid_argument("Not enough points to simplify");
-
     assert(startIndex < endIndex && "Start index must be smaller than end index");
+    assert(endIndex < points.size() && "End index is larger than the number of points");
+    // The inequalities 0 <= startIndex < endIndex < points.size() imply that points.size() >= 2
+    assert(points.size() >= 2 && "At least two points needed");
+
+    assert(epsilonSquared >= 0 && "epsilonSquared must be non-negative");
+
+    assert(indicesToKeep.size() >= 1 && "indicesToKeep should be non-empty");
+    assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
     // Find the point with the maximum distance from line between start and end
     double maxDistance = 0.0;

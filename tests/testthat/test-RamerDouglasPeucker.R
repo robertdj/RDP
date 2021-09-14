@@ -20,6 +20,14 @@ test_that("Only endpoints are kept when all points are on a line", {
 })
 
 
+test_that("Only endspoints are kept when all points are equal", {
+    expect_equal(
+        RamerDouglasPeucker(rep(0, 5), rep(0, 5), 1),
+        data.frame(x = rep(0, 2), y = rep(0, 2))
+    )
+})
+
+
 test_that("Varying epsilon", {
     x <- c(0, 1, 3, 5)
     y <- c(2, 1, 0, 1)
