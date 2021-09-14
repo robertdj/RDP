@@ -1,6 +1,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <vector>
+#include <tuple>
 
 
 namespace rdp {
@@ -43,6 +44,27 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 }
 
 
+// Find the point with the maximum distance from line between start and end
+std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
+                                                  size_t startIndex, size_t endIndex)
+{
+    double maxDistance = 0.0;
+    size_t maxDistanceIndex = startIndex;
+
+    for (size_t i = startIndex + 1; i != endIndex; ++i)
+    {
+        double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
+        if (thisDistance > maxDistance)
+        {
+            maxDistanceIndex = i;
+            maxDistance = thisDistance;
+        }
+    }
+
+    return {maxDistance, maxDistanceIndex};
+}
+
+
 // `indicesToKeep` should be initialized with a 0 in the first entry.
 void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared,
                          size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
@@ -57,19 +79,7 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
     assert(indicesToKeep.size() >= 1 && "indicesToKeep should be non-empty");
     assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
-    // Find the point with the maximum distance from line between start and end
-    double maxDistance = 0.0;
-    size_t maxDistanceIndex = startIndex;
-
-    for (size_t i = startIndex + 1; i != endIndex; ++i)
-    {
-        double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
-        if (thisDistance > maxDistance)
-        {
-            maxDistanceIndex = i;
-            maxDistance = thisDistance;
-        }
-    }
+    auto [maxDistance, maxDistanceIndex] = findMostDivergentPoint(points, startIndex, endIndex);
 
     if (maxDistance > epsilonSquared)
     {
