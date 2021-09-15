@@ -26,8 +26,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     if (nPoints != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
-    if (nPoints < 2)
-        throw std::invalid_argument("Not enough points to simplify");
+    if (nPoints <= 2)
+        return Rcpp::DataFrame::create(Rcpp::Named("x") = x, Rcpp::Named("y") = y);
 
     std::vector<rdp::Point2D> points;
     points.reserve(nPoints);
