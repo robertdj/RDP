@@ -43,7 +43,6 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 }
 
 
-// `indicesToKeep` should be initialized with a 0 in the first entry.
 void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared,
                          size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
 {
