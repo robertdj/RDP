@@ -26,18 +26,18 @@ double abs2(Point2D p)
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineEnd)
 {
-    Point2D lineDiff = lineEnd - lineStart;
-    Point2D pointToLineStart = pt - lineStart;
+    auto lineDiff = lineEnd - lineStart;
+    auto pointToLineStart = pt - lineStart;
 
-    double lineLengthSquared = abs2(lineDiff);
+    auto lineLengthSquared = abs2(lineDiff);
     if (lineLengthSquared == 0.0)
     {
         // The line is just a point
         return abs2(pointToLineStart);
     }
 
-    double determinant = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
-    double determinantSquared = determinant * determinant;
+    auto determinant = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
+    auto determinantSquared = determinant * determinant;
 
     return determinantSquared / lineLengthSquared;
 }
@@ -57,12 +57,12 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
     assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
     // Find the point with the maximum distance from line between start and end
-    double maxDistance = 0.0;
-    size_t maxDistanceIndex = startIndex;
+    auto maxDistance = 0.0;
+    auto maxDistanceIndex = startIndex;
 
-    for (size_t i = startIndex + 1; i != endIndex; ++i)
+    for (auto i = startIndex + 1; i != endIndex; ++i)
     {
-        double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
+        auto thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
         if (thisDistance > maxDistance)
         {
             maxDistanceIndex = i;
