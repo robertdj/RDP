@@ -77,9 +77,15 @@ test_that("Bigger example", {
 })
 
 
-test_that("Error when there are too few points", {
-    expect_error(RamerDouglasPeucker(1, 1, 5), class = "std::invalid_argument")
-    expect_error(RamerDouglasPeucker(numeric(0), numeric(0), 5), class = "std::invalid_argument")
+test_that("Input returned when there are too few points", {
+    expect_equal(RamerDouglasPeucker(c(1, 2), c(1, 2), 5), data.frame(x = c(1, 2), y = c(1, 2)))
+
+    expect_equal(RamerDouglasPeucker(1, 1, 5), data.frame(x = 1, y = 1))
+
+    expect_equal(
+        RamerDouglasPeucker(numeric(0), numeric(0), 5),
+        data.frame(x = numeric(0), y = numeric(0))
+    )
 })
 
 

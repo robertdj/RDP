@@ -5,6 +5,9 @@
 //'
 //' The [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) for reducing the number of points on a curve.
 //'
+//' @details If there are no more than two points it does not make sense to simplify.
+//' In this case the input is returned without further checks of `x` and `y`.
+//'
 //' @param x The `x` values of the curve as a vector.
 //' @param y The `y` values of the curve as a vector.
 //' @param epsilon The threshold for filtering outliers from the simplified curve.
@@ -26,8 +29,8 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     if (nPoints != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
-    if (nPoints < 2)
-        throw std::invalid_argument("Not enough points to simplify");
+    if (nPoints <= 2)
+        return Rcpp::DataFrame::create(Rcpp::Named("x") = x, Rcpp::Named("y") = y);
 
     std::vector<rdp::Point2D> points;
     points.reserve(nPoints);

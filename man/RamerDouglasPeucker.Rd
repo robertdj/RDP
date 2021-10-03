@@ -19,6 +19,10 @@ A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
 \description{
 The \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-Douglas-Peucker algorithm} for reducing the number of points on a curve.
 }
+\details{
+If there are no more than two points it does not make sense to simplify.
+In this case the input is returned without further checks of \code{x} and \code{y}.
+}
 \examples{
 RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
 
