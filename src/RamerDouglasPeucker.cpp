@@ -46,7 +46,7 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 
 // Find the point with the maximum distance from line between start and end
 std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
-                                                  size_t startIndex, size_t endIndex)
+                                                 size_t startIndex, size_t endIndex)
 {
     double maxDistance = 0.0;
     size_t maxDistanceIndex = startIndex;
@@ -54,6 +54,7 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
     for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
         double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
+
         if (thisDistance > maxDistance)
         {
             maxDistanceIndex = i;
@@ -61,7 +62,8 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
         }
     }
 
-    return {maxDistance, maxDistanceIndex};
+    // return {maxDistance, maxDistanceIndex};
+    return std::make_pair(maxDistance, maxDistanceIndex);
 }
 
 
