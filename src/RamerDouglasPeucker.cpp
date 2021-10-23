@@ -1,7 +1,7 @@
 #include <cassert>
 #include <stdexcept>
-#include <vector>
 #include <tuple>
+#include <vector>
 
 
 namespace rdp {
@@ -45,15 +45,31 @@ double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineE
 
 
 // Find the point with the maximum distance from line between start and end
+// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
                                                  size_t startIndex, size_t endIndex)
 {
+    assert(startIndex < endIndex && "Start index must be smaller than end index");
+    assert(endIndex < points.size() && "End index is larger than the number of points");
+    // The inequalities 0 <= startIndex < endIndex < points.size() imply that points.size() >= 2
+    assert(points.size() >= 2 && "At least two points needed");
+
     double maxDistance = 0.0;
     size_t maxDistanceIndex = startIndex;
 
+    Point2D startPoint = points[startIndex];
+    Point2D endPoint = points[endIndex];
+
+    Point2D lineDiff = endPoint - startPoint;
+    double lineLengthSquared = abs2(lineDiff);
+
+    double det1 = startPoint.y * (endPoint.x - startPoint.x) - startPoint.x * (endPoint.y - startPoint.y);
+
     for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
-        double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
+        // double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
+        double numerator = det1 - points[i].y * lineDiff.x + points[i].x * lineDiff.y;
+        double thisDistance = numerator * numerator / lineLengthSquared;
 
         if (thisDistance > maxDistance)
         {
