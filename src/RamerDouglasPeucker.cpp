@@ -24,26 +24,6 @@ double abs2(Point2D p)
 }
 
 
-// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
-double PerpendicularDistanceSquared(Point2D pt, Point2D lineStart, Point2D lineEnd)
-{
-    Point2D lineDiff = lineEnd - lineStart;
-    Point2D pointToLineStart = pt - lineStart;
-
-    double lineLengthSquared = abs2(lineDiff);
-    if (lineLengthSquared == 0.0)
-    {
-        // The line is just a point
-        return abs2(pointToLineStart);
-    }
-
-    double determinant = lineDiff.y * pointToLineStart.x - lineDiff.x * pointToLineStart.y;
-    double determinantSquared = determinant * determinant;
-
-    return determinantSquared / lineLengthSquared;
-}
-
-
 // Find the point with the maximum distance from line between start and end
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
