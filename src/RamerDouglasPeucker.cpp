@@ -61,23 +61,24 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
     Point2D endPoint = points[endIndex];
 
     Point2D lineDiff = endPoint - startPoint;
-    double lineLengthSquared = abs2(lineDiff);
 
     double det1 = startPoint.y * (endPoint.x - startPoint.x) - startPoint.x * (endPoint.y - startPoint.y);
 
     for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
-        // double thisDistance = PerpendicularDistanceSquared(points[i], points[startIndex], points[endIndex]);
         double numerator = det1 - points[i].y * lineDiff.x + points[i].x * lineDiff.y;
-        double thisDistance = numerator * numerator / lineLengthSquared;
+        double unscaledDistance = numerator * numerator;
 
-        if (thisDistance > maxDistance)
+        if (unscaledDistance > maxDistance)
         {
             maxDistanceIndex = i;
-            maxDistance = thisDistance;
+            maxDistance = unscaledDistance;
         }
     }
 
+    maxDistance /= abs2(lineDiff);
+
+    // Constructor is faster than initialization
     // return {maxDistance, maxDistanceIndex};
     return std::make_pair(maxDistance, maxDistanceIndex);
 }
