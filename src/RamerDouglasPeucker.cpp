@@ -42,17 +42,17 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
 
     Point2D lineDiff = endPoint - startPoint;
 
-    double det1 = startPoint.y * (endPoint.x - startPoint.x) - startPoint.x * (endPoint.y - startPoint.y);
+    double offset = startPoint.y * (endPoint.x - startPoint.x) - startPoint.x * (endPoint.y - startPoint.y);
 
     for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
-        double numerator = det1 - points[i].y * lineDiff.x + points[i].x * lineDiff.y;
-        double unscaledDistance = numerator * numerator;
+        double unscaledDistance = offset - points[i].y * lineDiff.x + points[i].x * lineDiff.y;
+        double unscaledDistanceSquared = unscaledDistance * unscaledDistance;
 
-        if (unscaledDistance > maxDistance)
+        if (unscaledDistanceSquared > maxDistance)
         {
             maxDistanceIndex = i;
-            maxDistance = unscaledDistance;
+            maxDistance = unscaledDistanceSquared;
         }
     }
 
