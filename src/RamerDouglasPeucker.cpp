@@ -24,8 +24,9 @@ double abs2(Point2D p)
 }
 
 
-// Find the point with the maximum distance from line between start and end
-// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+// Find the point with the maximum distance from line between start and end.
+// Rearranging this formula to avoid recomputing constants:
+// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
 std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
                                                  size_t startIndex, size_t endIndex)
 {
