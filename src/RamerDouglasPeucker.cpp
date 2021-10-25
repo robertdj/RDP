@@ -34,15 +34,11 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
     // The inequalities 0 <= startIndex < endIndex < points.size() imply that points.size() >= 2
     assert(points.size() >= 2 && "At least two points needed");
 
+    Point2D lineDiff = points[endIndex] - points[startIndex];
+    double offset = points[startIndex].y * lineDiff.x - points[startIndex].x * lineDiff.y;
+
     double maxDistance = 0.0;
     size_t maxDistanceIndex = startIndex;
-
-    Point2D startPoint = points[startIndex];
-    Point2D endPoint = points[endIndex];
-
-    Point2D lineDiff = endPoint - startPoint;
-
-    double offset = startPoint.y * (endPoint.x - startPoint.x) - startPoint.x * (endPoint.y - startPoint.y);
 
     for (size_t i = startIndex + 1; i != endIndex; ++i)
     {
@@ -59,7 +55,6 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
     maxDistance /= abs2(lineDiff);
 
     // Constructor is faster than initialization
-    // return {maxDistance, maxDistanceIndex};
     return std::make_pair(maxDistance, maxDistanceIndex);
 }
 
