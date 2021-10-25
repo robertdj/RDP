@@ -65,8 +65,8 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
 
 
 // `indicesToKeep` should be initialized with a 0 in the first entry.
-void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquared,
-                         size_t startIndex, size_t endIndex, std::vector<size_t> &indicesToKeep)
+void RamerDouglasPeucker(const std::vector<Point2D> &points, size_t startIndex, size_t endIndex,
+                         double epsilonSquared, std::vector<size_t> &indicesToKeep)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
     assert(endIndex < points.size() && "End index is larger than the number of points");
@@ -83,8 +83,8 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, double epsilonSquar
     if (maxDistance > epsilonSquared)
     {
         // Recursive call
-        RamerDouglasPeucker(points, epsilonSquared, startIndex, maxDistanceIndex, indicesToKeep);
-        RamerDouglasPeucker(points, epsilonSquared, maxDistanceIndex, endIndex, indicesToKeep);
+        RamerDouglasPeucker(points, startIndex, maxDistanceIndex, epsilonSquared, indicesToKeep);
+        RamerDouglasPeucker(points, maxDistanceIndex, endIndex, epsilonSquared, indicesToKeep);
     }
     else
     {
