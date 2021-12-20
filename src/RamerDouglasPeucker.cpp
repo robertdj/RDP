@@ -23,21 +23,54 @@ double abs2(Point2D p)
 }
 
 
-// Find the point with the maximum distance from line between start and end.
-// Rearranging this formula to avoid recomputing constants:
-// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
-std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &points,
-                                                 size_t startIndex, size_t endIndex)
+std::pair<double, size_t> findMostDivergentPointFromPoint(const std::vector<Point2D> &points,
+                                                          size_t startIndex, size_t endIndex)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
     assert(endIndex < points.size() && "End index is larger than the number of points");
-    // The inequalities 0 <= startIndex < endIndex < points.size() imply that points.size() >= 2
+    assert(points.size() >= 2 && "At least two points needed");
+
+    assert(abs2(points[startIndex] - points[endIndex]) == 0 && "Start and end point must be equal");
+
+    double maxDistanceSquared = 0.0;
+    size_t maxDistanceIndex = startIndex;
+
+    for (size_t i = startIndex + 1; i != endIndex; ++i)
+    {
+        double distanceSquared = abs2(points[i] - points[startIndex]);
+
+        if (distanceSquared > maxDistanceSquared)
+        {
+            maxDistanceIndex = i;
+            maxDistanceSquared = distanceSquared;
+        }
+    }
+
+    return std::make_pair(maxDistanceSquared, maxDistanceIndex);
+}
+
+
+// Find the point with the maximum distance from line between start and end.
+// Rearranging this formula to avoid recomputing constants:
+// https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
+std::pair<double, size_t> findMostDivergentPointFromLine(const std::vector<Point2D> &points,
+                                                         size_t startIndex, size_t endIndex)
+{
+    assert(startIndex < endIndex && "Start index must be smaller than end index");
+    assert(endIndex < points.size() && "End index is larger than the number of points");
     assert(points.size() >= 2 && "At least two points needed");
 
     Point2D lineDiff = points[endIndex] - points[startIndex];
+    double lineLengthSquared = abs2(lineDiff);
+
+    if (lineLengthSquared == 0)
+    {
+        return findMostDivergentPointFromPoint(points, startIndex, endIndex);
+    }
+
     double offset = points[startIndex].y * lineDiff.x - points[startIndex].x * lineDiff.y;
 
-    double maxDistance = 0.0;
+    double maxDistanceSquared = 0.0;
     size_t maxDistanceIndex = startIndex;
 
     for (size_t i = startIndex + 1; i != endIndex; ++i)
@@ -45,21 +78,20 @@ std::pair<double, size_t> findMostDivergentPoint(const std::vector<Point2D> &poi
         double unscaledDistance = offset - points[i].y * lineDiff.x + points[i].x * lineDiff.y;
         double unscaledDistanceSquared = unscaledDistance * unscaledDistance;
 
-        if (unscaledDistanceSquared > maxDistance)
+        if (unscaledDistanceSquared > maxDistanceSquared)
         {
             maxDistanceIndex = i;
-            maxDistance = unscaledDistanceSquared;
+            maxDistanceSquared = unscaledDistanceSquared;
         }
     }
 
-    maxDistance /= abs2(lineDiff);
+    maxDistanceSquared /= lineLengthSquared;
 
     // Constructor is faster than initialization
-    return std::make_pair(maxDistance, maxDistanceIndex);
+    return std::make_pair(maxDistanceSquared, maxDistanceIndex);
 }
 
 
-// `indicesToKeep` should be initialized with a 0 in the first entry.
 void RamerDouglasPeucker(const std::vector<Point2D> &points, size_t startIndex, size_t endIndex,
                          double epsilonSquared, std::vector<size_t> &indicesToKeep)
 {
@@ -73,11 +105,10 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, size_t startIndex, 
     assert(indicesToKeep.size() >= 1 && "indicesToKeep should be non-empty");
     assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
-    auto [maxDistance, maxDistanceIndex] = findMostDivergentPoint(points, startIndex, endIndex);
+    auto [maxDistanceSquared, maxDistanceIndex] = findMostDivergentPointFromLine(points, startIndex, endIndex);
 
-    if (maxDistance > epsilonSquared)
+    if (maxDistanceSquared > epsilonSquared)
     {
-        // Recursive call
         RamerDouglasPeucker(points, startIndex, maxDistanceIndex, epsilonSquared, indicesToKeep);
         RamerDouglasPeucker(points, maxDistanceIndex, endIndex, epsilonSquared, indicesToKeep);
     }
