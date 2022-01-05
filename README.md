@@ -40,7 +40,7 @@ remotes::install_github("robertdj/RDP")
 
 # Example
 
-There is a single function in the {RDP} package. An example from the
+There is a single function in the {RDP} package. Here is an example from the
 Wikipedia page linked to above with a description of the algorithm. The
 original line is the black and the approximating line is red.
 
