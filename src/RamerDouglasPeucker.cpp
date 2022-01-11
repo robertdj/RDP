@@ -23,6 +23,7 @@ double abs2(Point2D p)
 }
 
 
+// From reference points[startIndex] == points[endIndex], find the point furthest away.
 std::pair<double, size_t> findMostDivergentPointFromPoint(const std::vector<Point2D> &points,
                                                           size_t startIndex, size_t endIndex)
 {
