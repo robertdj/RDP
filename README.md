@@ -40,9 +40,9 @@ remotes::install_github("robertdj/RDP")
 
 # Example
 
-There is a single function in the {RDP} package. Here is an example from the
-Wikipedia page linked to above with a description of the algorithm. The
-original line is the black and the approximating line is red.
+There is a single function in the {RDP} package. Here is an example from
+the Wikipedia page linked to above with a description of the algorithm.
+The original line is black and the approximating line is red.
 
 ``` r
 x <- seq(from = 0, to = 5, by = 0.01)
@@ -68,7 +68,7 @@ bench::mark(
     kmlShape = kmlShape::DouglasPeuckerEpsilon(x, y, epsilon = 0.1)
 )
 #> Warning: Some expressions had a GC in every iteration; so filtering is disabled.
-#> # A tibble: 2 x 6
+#> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
 #> 1 RDP        822.57µs  938.5µs   945.       5.28MB     4.00
