@@ -49,7 +49,7 @@ remotes::install_github("robertdj/RDP")
 
 There is a single function in the {RDP} package.
 Here is an example from the Wikipedia page linked to above with a description of the algorithm.
-The original line is the black and the approximating line is red.
+The original line is black and the approximating line is red.
 
 ```{r example}
 x <- seq(from = 0, to = 5, by = 0.01)

@@ -1,6 +1,6 @@
 Package: RDP
 Title: The Ramer-Douglas-Peucker Algorithm
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "cran@dahl-jacobsen.dk")
 Description: Pretty fast implementation of the Ramer-Douglas-Peucker algorithm for reducing the number of points on a 2D curve.
     Urs Ramer (1972), "An iterative procedure for the polygonal approximation of plane curves" <doi:10.1016/S0146-664X(72)80017-0>.
@@ -9,7 +9,7 @@ License: GPL-3
 URL: https://github.com/robertdj/RDP
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 LinkingTo: 
     Rcpp
 Imports: 
