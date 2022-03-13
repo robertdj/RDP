@@ -24,7 +24,7 @@ double abs2(Point2D p)
 
 
 // From reference points[startIndex] == points[endIndex], find the point furthest away.
-std::pair<double, size_t> findMostDivergentPointFromPoint(const std::vector<Point2D> &points,
+std::pair<double, size_t> findMostDistantPoint(const std::vector<Point2D> &points,
                                                           size_t startIndex, size_t endIndex)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
@@ -54,7 +54,7 @@ std::pair<double, size_t> findMostDivergentPointFromPoint(const std::vector<Poin
 // Find the point with the maximum distance from line between start and end.
 // Rearranging this formula to avoid recomputing constants:
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
-std::pair<double, size_t> findMostDivergentPointFromLine(const std::vector<Point2D> &points,
+std::pair<double, size_t> findMostDistantPointFromLine(const std::vector<Point2D> &points,
                                                          size_t startIndex, size_t endIndex)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
@@ -66,7 +66,7 @@ std::pair<double, size_t> findMostDivergentPointFromLine(const std::vector<Point
 
     if (lineLengthSquared == 0)
     {
-        return findMostDivergentPointFromPoint(points, startIndex, endIndex);
+        return findMostDistantPoint(points, startIndex, endIndex);
     }
 
     double offset = points[startIndex].y * lineDiff.x - points[startIndex].x * lineDiff.y;
@@ -106,7 +106,7 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, size_t startIndex, 
     assert(indicesToKeep.size() >= 1 && "indicesToKeep should be non-empty");
     assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
-    auto [maxDistanceSquared, maxDistanceIndex] = findMostDivergentPointFromLine(points, startIndex, endIndex);
+    auto [maxDistanceSquared, maxDistanceIndex] = findMostDistantPointFromLine(points, startIndex, endIndex);
 
     if (maxDistanceSquared > epsilonSquared)
     {
