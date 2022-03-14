@@ -43,20 +43,20 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
     }
 
     // We don't know the number of indices to keep a priori, but the first point is always kept
-    std::vector<size_t> indicesToKeep;
+    std::vector<std::size_t> indicesToKeep;
     indicesToKeep.reserve(nPoints);
     indicesToKeep.push_back(0);
 
     rdp::RamerDouglasPeucker(points, 0, nPoints - 1, epsilon * epsilon, indicesToKeep);
 
     // Here initialization is faster than reserve + push_back
-    size_t nIndices = indicesToKeep.size();
+    std::size_t nIndices = indicesToKeep.size();
     std::vector<double> xOut(nIndices);
     std::vector<double> yOut(nIndices);
 
-    for (size_t i = 0; i != nIndices; ++i)
+    for (std::size_t i = 0; i != nIndices; ++i)
     {
-        size_t index = indicesToKeep[i];
+        std::size_t index = indicesToKeep[i];
         xOut[i] = x[index];
         yOut[i] = y[index];
     }
