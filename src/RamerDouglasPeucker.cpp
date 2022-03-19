@@ -23,7 +23,7 @@ double abs2(Point2D p)
 }
 
 
-// From reference points[startIndex] == points[endIndex], find the point furthest away.
+// Find the point furthest away from reference (points[startIndex] == points[endIndex])
 std::pair<double, std::size_t> findMostDistantPoint(const std::vector<Point2D> &points,
                                                           std::size_t startIndex, std::size_t endIndex)
 {
