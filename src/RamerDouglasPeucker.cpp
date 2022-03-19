@@ -23,9 +23,9 @@ double abs2(Point2D p)
 }
 
 
-// From reference points[startIndex] == points[endIndex], find the point furthest away.
+// Find the point furthest away from reference (points[startIndex] == points[endIndex])
 std::pair<double, std::size_t> findMostDistantPoint(const std::vector<Point2D> &points,
-                                                          std::size_t startIndex, std::size_t endIndex)
+                                                    std::size_t startIndex, std::size_t endIndex)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
     assert(endIndex < points.size() && "End index is larger than the number of points");
@@ -55,7 +55,8 @@ std::pair<double, std::size_t> findMostDistantPoint(const std::vector<Point2D> &
 // Rearranging this formula to avoid recomputing constants:
 // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points
 std::pair<double, std::size_t> findMostDistantPointFromLine(const std::vector<Point2D> &points,
-                                                         std::size_t startIndex, std::size_t endIndex)
+                                                            std::size_t startIndex,
+                                                            std::size_t endIndex)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
     assert(endIndex < points.size() && "End index is larger than the number of points");
@@ -93,8 +94,9 @@ std::pair<double, std::size_t> findMostDistantPointFromLine(const std::vector<Po
 }
 
 
-void RamerDouglasPeucker(const std::vector<Point2D> &points, std::size_t startIndex, std::size_t endIndex,
-                         double epsilonSquared, std::vector<std::size_t> &indicesToKeep)
+void RamerDouglasPeucker(const std::vector<Point2D> &points, std::size_t startIndex,
+                         std::size_t endIndex, double epsilonSquared,
+                         std::vector<std::size_t> &indicesToKeep)
 {
     assert(startIndex < endIndex && "Start index must be smaller than end index");
     assert(endIndex < points.size() && "End index is larger than the number of points");
@@ -106,7 +108,8 @@ void RamerDouglasPeucker(const std::vector<Point2D> &points, std::size_t startIn
     assert(indicesToKeep.size() >= 1 && "indicesToKeep should be non-empty");
     assert(indicesToKeep[0] == 0 && "indicesToKeep should be initialized with a 0");
 
-    auto [maxDistanceSquared, maxDistanceIndex] = findMostDistantPointFromLine(points, startIndex, endIndex);
+    auto [maxDistanceSquared, maxDistanceIndex] =
+        findMostDistantPointFromLine(points, startIndex, endIndex);
 
     if (maxDistanceSquared > epsilonSquared)
     {
