@@ -23,15 +23,15 @@
 // [[Rcpp::export]]
 Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon)
 {
-    if (epsilon < 0 || Rcpp::NumericVector::is_na(epsilon))
-        throw std::domain_error("epsilon must be a non-negative number");
-
     R_xlen_t nPoints = x.length();
     if (nPoints != y.length())
         throw std::invalid_argument("x and y vectors must be of equal length");
 
     if (nPoints <= 2)
         return Rcpp::DataFrame::create(Rcpp::Named("x") = x, Rcpp::Named("y") = y);
+
+    if (epsilon < 0 || Rcpp::NumericVector::is_na(epsilon))
+        throw std::domain_error("epsilon must be a non-negative number");
 
     std::vector<rdp::Point2D> points;
     points.reserve(nPoints);
