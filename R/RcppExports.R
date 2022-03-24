@@ -7,10 +7,11 @@
 #'
 #' @details If there are no more than two points it does not make sense to simplify.
 #' In this case the input is returned without further checks of `x` and `y`.
+#' In particular, the input is not checked for `NA` values.
 #'
-#' @param x The `x` values of the curve as a vector.
-#' @param y The `y` values of the curve as a vector.
-#' @param epsilon The threshold for filtering outliers from the simplified curve.
+#' @param x `[numeric]` The `x` values of the curve as a vector without `NA` values.
+#' @param y `[numeric]` The `y` values of the curve as a vector without `NA` values.
+#' @param epsilon `[positive numeric(1)]` The threshold for filtering outliers from the simplified curve.
 #'
 #' @return A `data.frame` with `x` and `y` values of the simplified curve.
 #'

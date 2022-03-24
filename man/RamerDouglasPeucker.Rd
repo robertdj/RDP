@@ -7,11 +7,11 @@
 RamerDouglasPeucker(x, y, epsilon)
 }
 \arguments{
-\item{x}{The \code{x} values of the curve as a vector.}
+\item{x}{\verb{[numeric]} The \code{x} values of the curve as a vector without \code{NA} values.}
 
-\item{y}{The \code{y} values of the curve as a vector.}
+\item{y}{\verb{[numeric]} The \code{y} values of the curve as a vector without \code{NA} values.}
 
-\item{epsilon}{The threshold for filtering outliers from the simplified curve.}
+\item{epsilon}{\verb{[positive numeric(1)]} The threshold for filtering outliers from the simplified curve.}
 }
 \value{
 A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
@@ -22,6 +22,7 @@ The \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-D
 \details{
 If there are no more than two points it does not make sense to simplify.
 In this case the input is returned without further checks of \code{x} and \code{y}.
+In particular, the input is not checked for \code{NA} values.
 }
 \examples{
 RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
