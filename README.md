@@ -81,6 +81,6 @@ times faster and only use a fraction of the memory.
 
 # Acknowledgements
 
-The C++ code was *originally* based on [a Gist from
-TimSC](https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51),
+The C++ code was *originally* based on \[a Gist from
+@TimSC\](<https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51>),
 but over time it has been almost completely rewritten.
