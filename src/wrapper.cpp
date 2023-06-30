@@ -12,19 +12,19 @@
 //' @param x `[numeric]` The `x` values of the curve as a vector without `NA` values.
 //' @param y `[numeric]` The `y` values of the curve as a vector without `NA` values.
 //' @param epsilon `[positive numeric(1)]` The threshold for filtering outliers from the simplified curve.
-//' @param keepIndex `[logical]` If `TRUE`, returns a column called `index` with the index locations of points that are kept.
+//' @param keep_index `[logical]` If `TRUE`, returns a column called `index` with the index locations of points that are kept.
 //'
 //' @return A `data.frame` with `x` and `y` values of the simplified curve.
 //'
 //' @examples
 //' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
-//' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keepIndex = TRUE)
+//' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keep_index = TRUE)
 //'
 //' @export
 //'
 // [[Rcpp::export]]
 Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon,
-                                    bool keepIndex = false)
+                                    bool keep_index = false)
 {
     R_xlen_t nPoints = x.length();
     if (nPoints != y.length())
@@ -63,10 +63,11 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         std::size_t index = indicesToKeep[i];
         xOut[i] = x[index];
         yOut[i] = y[index];
-        indicesToKeep[i] += 1; // index from 1 before returning to R
+        // Add 1 to index before returning to R:
+        indicesToKeep[i] += 1;
     }
 
-    if (keepIndex) {
+    if (keep_index) {
         return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut,
                                        Rcpp::Named("index") = indicesToKeep);
     } else {

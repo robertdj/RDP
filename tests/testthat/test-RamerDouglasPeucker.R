@@ -81,7 +81,7 @@ test_that("Keeps indices", {
     y <- c(21.25, 12.0, 3.1, 12.07, 18.15, 16.45, 9.7, 21.1)
 
     expect_equal(
-        RamerDouglasPeucker(x, y, 5, keepIndex = TRUE),
+        RamerDouglasPeucker(x, y, 5, keep_index = TRUE),
         data.frame(x = c(3.5, 23.2, 54.6, 71.5, 101.3), y = c(21.25, 3.1, 18.15, 9.7, 21.1),
                    index = c(1, 3, 5, 7, 8))
     )

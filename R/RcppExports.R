@@ -12,17 +12,17 @@
 #' @param x `[numeric]` The `x` values of the curve as a vector without `NA` values.
 #' @param y `[numeric]` The `y` values of the curve as a vector without `NA` values.
 #' @param epsilon `[positive numeric(1)]` The threshold for filtering outliers from the simplified curve.
-#' @param keepIndex `[logical]` If `TRUE`, returns a column called `index` with the index locations of points that are kept.
+#' @param keep_index `[logical]` If `TRUE`, returns a column called `index` with the index locations of points that are kept.
 #'
 #' @return A `data.frame` with `x` and `y` values of the simplified curve.
 #'
 #' @examples
 #' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
-#' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keepIndex = TRUE)
+#' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keep_index = TRUE)
 #'
 #' @export
 #'
-RamerDouglasPeucker <- function(x, y, epsilon, keepIndex = FALSE) {
-    .Call(`_RDP_RamerDouglasPeucker`, x, y, epsilon, keepIndex)
+RamerDouglasPeucker <- function(x, y, epsilon, keep_index = FALSE) {
+    .Call(`_RDP_RamerDouglasPeucker`, x, y, epsilon, keep_index)
 }
 

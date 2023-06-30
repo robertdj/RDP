@@ -4,7 +4,7 @@
 \alias{RamerDouglasPeucker}
 \title{Simplify a curve using the Ramer-Douglas-Peucker algorithm.}
 \usage{
-RamerDouglasPeucker(x, y, epsilon, keepIndex = FALSE)
+RamerDouglasPeucker(x, y, epsilon, keep_index = FALSE)
 }
 \arguments{
 \item{x}{\verb{[numeric]} The \code{x} values of the curve as a vector without \code{NA} values.}
@@ -13,7 +13,7 @@ RamerDouglasPeucker(x, y, epsilon, keepIndex = FALSE)
 
 \item{epsilon}{\verb{[positive numeric(1)]} The threshold for filtering outliers from the simplified curve.}
 
-\item{keepIndex}{\verb{[logical]} If \code{TRUE}, returns a column called \code{index} with the index locations of points that are kept.}
+\item{keep_index}{\verb{[logical]} If \code{TRUE}, returns a column called \code{index} with the index locations of points that are kept.}
 }
 \value{
 A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
@@ -28,6 +28,6 @@ In particular, the input is not checked for \code{NA} values.
 }
 \examples{
 RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
-RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keepIndex = TRUE)
+RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keep_index = TRUE)
 
 }
