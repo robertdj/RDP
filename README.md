@@ -82,5 +82,11 @@ times faster and only use a fraction of the memory.
 # Acknowledgements
 
 The C++ code was *originally* based on [a Gist from
-TimSC](https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51),
+TimSC](<https://gist.github.com/TimSC/0813573d77734bcb6f2cd2cf6cc7aa51>),
 but over time it has been almost completely rewritten.
+
+
+# License
+
+This package is almost exclusively C++ code that is linked against R.
+[As explained in Rcpp's FAQ](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf) this leaves me no option but to use GPL.
