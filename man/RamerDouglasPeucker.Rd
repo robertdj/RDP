@@ -19,7 +19,7 @@ RamerDouglasPeucker(x, y, epsilon, keep_index = FALSE)
 A \code{data.frame} with \code{x} and \code{y} values of the simplified curve.
 }
 \description{
-The \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-Douglas-Peucker algorithm} for reducing the number of points on a curve.
+Implements the \href{https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm}{Ramer-Douglas-Peucker algorithm} for reducing the number of points on a curve.
 }
 \details{
 If there are no more than two points it does not make sense to simplify.
