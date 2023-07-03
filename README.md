@@ -89,4 +89,4 @@ but over time it has been almost completely rewritten.
 # License
 
 This package is almost exclusively C++ code that is linked against R.
-[As explained in RCpp's FAQ](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf) this leaves me no option but to use GPL.
+[As explained in Rcpp's FAQ](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf) this leaves me no option but to use GPL.

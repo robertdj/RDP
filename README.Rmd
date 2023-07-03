@@ -84,4 +84,4 @@ The C++ code was *originally* based on [a Gist from TimSC](https://gist.github.c
 # License
 
 This package is almost exclusively C++ code that is linked against R.
-[As explained in RCpp's FAQ](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf) this leaves me no option but to use GPL.
+[As explained in Rcpp's FAQ](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf) this leaves me no option but to use GPL.
