@@ -11,21 +11,22 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // RamerDouglasPeucker
-Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon);
-RcppExport SEXP _RDP_RamerDouglasPeucker(SEXP xSEXP, SEXP ySEXP, SEXP epsilonSEXP) {
+Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon, bool keep_index);
+RcppExport SEXP _RDP_RamerDouglasPeucker(SEXP xSEXP, SEXP ySEXP, SEXP epsilonSEXP, SEXP keep_indexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
-    rcpp_result_gen = Rcpp::wrap(RamerDouglasPeucker(x, y, epsilon));
+    Rcpp::traits::input_parameter< bool >::type keep_index(keep_indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(RamerDouglasPeucker(x, y, epsilon, keep_index));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_RDP_RamerDouglasPeucker", (DL_FUNC) &_RDP_RamerDouglasPeucker, 3},
+    {"_RDP_RamerDouglasPeucker", (DL_FUNC) &_RDP_RamerDouglasPeucker, 4},
     {NULL, NULL, 0}
 };
 

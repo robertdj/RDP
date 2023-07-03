@@ -76,6 +76,17 @@ test_that("Bigger example", {
     )
 })
 
+test_that("Keeps indices", {
+    x <- c(3.5, 7.3, 23.2, 37.2, 54.6, 62.2, 71.5, 101.3)
+    y <- c(21.25, 12.0, 3.1, 12.07, 18.15, 16.45, 9.7, 21.1)
+
+    expect_equal(
+        RamerDouglasPeucker(x, y, 5, keep_index = TRUE),
+        data.frame(x = c(3.5, 23.2, 54.6, 71.5, 101.3), y = c(21.25, 3.1, 18.15, 9.7, 21.1),
+                   index = c(1, 3, 5, 7, 8))
+    )
+})
+
 
 test_that("Input returned when there are too few points", {
     expect_equal(RamerDouglasPeucker(c(1, 2), c(1, 2), 5), data.frame(x = c(1, 2), y = c(1, 2)))

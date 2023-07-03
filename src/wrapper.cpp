@@ -1,9 +1,9 @@
 #include <Rcpp.h>
 #include "RamerDouglasPeucker.h"
 
-//' Ramer-Douglas-Peucker
+//' Simplify a curve using the Ramer-Douglas-Peucker algorithm.
 //'
-//' The [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) for reducing the number of points on a curve.
+//' Implements the [Ramer-Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm) for reducing the number of points on a curve.
 //'
 //' @details If there are no more than two points it does not make sense to simplify.
 //' In this case the input is returned without further checks of `x` and `y`.
@@ -12,16 +12,19 @@
 //' @param x `[numeric]` The `x` values of the curve as a vector without `NA` values.
 //' @param y `[numeric]` The `y` values of the curve as a vector without `NA` values.
 //' @param epsilon `[positive numeric(1)]` The threshold for filtering outliers from the simplified curve.
+//' @param keep_index `[logical]` If `TRUE`, returns a column called `index` with the index locations of points that are kept.
 //'
 //' @return A `data.frame` with `x` and `y` values of the simplified curve.
 //'
 //' @examples
 //' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5)
+//' RDP::RamerDouglasPeucker(x = c(0, 1, 3, 5), y = c(2, 1, 0, 1), epsilon = 0.5, keep_index = TRUE)
 //'
 //' @export
 //'
 // [[Rcpp::export]]
-Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon)
+Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y, double epsilon,
+                                    bool keep_index = false)
 {
     R_xlen_t nPoints = x.length();
     if (nPoints != y.length())
@@ -60,7 +63,15 @@ Rcpp::DataFrame RamerDouglasPeucker(Rcpp::NumericVector x, Rcpp::NumericVector y
         std::size_t index = indicesToKeep[i];
         xOut[i] = x[index];
         yOut[i] = y[index];
+        // Add 1 to index before returning to R:
+        indicesToKeep[i] += 1;
     }
 
-    return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut);
+    if (keep_index) {
+        return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut,
+                                       Rcpp::Named("index") = indicesToKeep);
+    } else {
+        return Rcpp::DataFrame::create(Rcpp::Named("x") = xOut, Rcpp::Named("y") = yOut);
+    }
+
 }
